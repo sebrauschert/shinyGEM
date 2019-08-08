@@ -35,12 +35,12 @@
 #' GEM_Emodel(env_file, covariate_file, methylation_file, Emodel_pv, output_file, qqplot_file)
 GEM_Emodel <-
   function(env_file_name, covariate_file_name, methylation_file_name,
-           Emodel_pv, output_file_name, qqplot_file_name) {
+           Emodel_pv, output_file_name, qqplot_file_name, fileDelimiter = "\t") {
 
     errorCovariance = numeric();
 
     env <- SlicedData$new();
-    env$fileDelimiter = "\t";      # the TAB character
+    env$fileDelimiter = fileDelimiter;      # default the TAB character
     env$fileOmitCharacters = "NA"; # denote missing values;
     env$fileSkipRows = 1;          # one row of column labels
     env$fileSkipColumns = 1;       # one column of row labels
@@ -48,7 +48,7 @@ GEM_Emodel <-
     env$LoadFile(env_file_name);
 
     cvrt <- SlicedData$new();
-    cvrt$fileDelimiter = "\t";      # the TAB character
+    cvrt$fileDelimiter = fileDelimiter;      # default the TAB character
     cvrt$fileOmitCharacters = "NA"; # denote missing values;
     cvrt$fileSkipRows = 1;          # one row of column labels
     cvrt$fileSkipColumns = 1;       # one column of row labels
@@ -57,7 +57,7 @@ GEM_Emodel <-
     }
 
     cpg = SlicedData$new();
-    cpg$fileDelimiter = "\t";      # the TAB character
+    cpg$fileDelimiter = fileDelimiter;      # default the TAB character
     cpg$fileOmitCharacters = "NA"; # denote missing values;
     cpg$fileSkipRows = 1;          # one row of column labels
     cpg$fileSkipColumns = 1;       # one column of row labels
@@ -141,13 +141,13 @@ GEM_Emodel <-
 #' GEM_Gmodel(snp_file, covariate_file, methylation_file, Gmodel_pv, output_file)
 GEM_Gmodel <-
   function(snp_file_name, covariate_file_name, methylation_file_name,
-           Gmodel_pv, output_file_name)
+           Gmodel_pv, output_file_name, fileDelimiter= "\t")
   {
 
     errorCovariance = numeric();
 
     snp = SlicedData$new();
-    snp$fileDelimiter = "\t";      # the TAB character
+    snp$fileDelimiter = fileDelimiter;      # default the TAB character
     snp$fileOmitCharacters = "NA"; # denote missing values;
     snp$fileSkipRows = 1;          # one row of column labels
     snp$fileSkipColumns = 1;       # one column of row labels
@@ -155,7 +155,7 @@ GEM_Gmodel <-
     snp$LoadFile(snp_file_name);
 
     cvrt = SlicedData$new();
-    cvrt$fileDelimiter = "\t";      # the TAB character
+    cvrt$fileDelimiter = fileDelimiter;      # default the TAB character
     cvrt$fileOmitCharacters = "NA"; # denote missing values;
     cvrt$fileSkipRows = 1;          # one row of column labels
     cvrt$fileSkipColumns = 1;       # one column of row labels
@@ -164,7 +164,7 @@ GEM_Gmodel <-
     }
 
     cpg = SlicedData$new();
-    cpg$fileDelimiter = "\t";      # the TAB character
+    cpg$fileDelimiter = fileDelimiter;      # default the TAB character
     cpg$fileOmitCharacters = "NA"; # denote missing values;
     cpg$fileSkipRows = 1;          # one row of column labels
     cpg$fileSkipColumns = 1;       # one column of row labels
@@ -250,13 +250,13 @@ GEM_Gmodel <-
 #' GEM_GxEmodel(snp_file, covariate_file, methylation_file, GxEmodel_pv, output_file)
 GEM_GxEmodel <-
   function(snp_file_name, covariate_file_name, methylation_file_name,
-           GxEmodel_pv, output_file_name, topKplot = 10)
+           GxEmodel_pv, output_file_name, topKplot = 10, fileDelimiter = "\t")
   {
 
     errorCovariance = numeric();
 
     snp = SlicedData$new();
-    snp$fileDelimiter = "\t";      # the TAB character
+    snp$fileDelimiter = fileDelimiter;      # default the TAB character
     snp$fileOmitCharacters = "NA"; # denote missing values;
     snp$fileSkipRows = 1;          # one row of column labels
     snp$fileSkipColumns = 1;       # one column of row labels
@@ -264,7 +264,7 @@ GEM_GxEmodel <-
     snp$LoadFile(snp_file_name);
 
     cvrt = SlicedData$new();
-    cvrt$fileDelimiter = "\t";      # the TAB character
+    cvrt$fileDelimiter = fileDelimiter;      # default the TAB character
     cvrt$fileOmitCharacters = "NA"; # denote missing values;
     cvrt$fileSkipRows = 1;          # one row of column labels
     cvrt$fileSkipColumns = 1;       # one column of row labels
@@ -273,7 +273,7 @@ GEM_GxEmodel <-
     }
 
     cpg = SlicedData$new();
-    cpg$fileDelimiter = "\t";      # the TAB character
+    cpg$fileDelimiter = fileDelimiter;      # default the TAB character
     cpg$fileOmitCharacters = "NA"; # denote missing values;
     cpg$fileSkipRows = 1;          # one row of column labels
     cpg$fileSkipColumns = 1;       # one column of row labels
@@ -384,13 +384,13 @@ GEM_GxEmodel <-
 #' @return save results automatically
 GEM_GWASmodel <-
   function(env_file_name, snp_file_name, covariate_file_name,
-           GWASmodel_pv, output_file_name, qqplot_file_name)
+           GWASmodel_pv, output_file_name, qqplot_file_name, fileDelimiter = "\t")
   {
 
     errorCovariance = numeric();
 
     snp = SlicedData$new();
-    snp$fileDelimiter = "\t";      # the TAB character
+    snp$fileDelimiter = fileDelimiter;      # Default the TAB character
     snp$fileOmitCharacters = "NA"; # denote missing values;
     snp$fileSkipRows = 1;          # one row of column labels
     snp$fileSkipColumns = 1;       # one column of row labels
@@ -398,7 +398,7 @@ GEM_GWASmodel <-
     snp$LoadFile(snp_file_name);
 
     cvrt = SlicedData$new();
-    cvrt$fileDelimiter = "\t";      # the TAB character
+    cvrt$fileDelimiter = fileDelimiter;      # default the TAB character
     cvrt$fileOmitCharacters = "NA"; # denote missing values;
     cvrt$fileSkipRows = 1;          # one row of column labels
     cvrt$fileSkipColumns = 1;       # one column of row labels
@@ -407,7 +407,7 @@ GEM_GWASmodel <-
     }
 
     env = SlicedData$new();
-    env$fileDelimiter = "\t";      # the TAB character
+    env$fileDelimiter = fileDelimiter;      # Default the TAB character
     env$fileOmitCharacters = "NA"; # denote missing values;
     env$fileSkipRows = 1;          # one row of column labels
     env$fileSkipColumns = 1;       # one column of row labels
