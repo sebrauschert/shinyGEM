@@ -29,7 +29,9 @@ library(data.table)
 #'
 #' @return output a list of values for the
 #' @export
-#'
+#'envFileName = "R/envir.csv"
+#'methylFileName = "R/Methyl.csv"
+#'predictorName = "preg_SMK_Y_N"
 #'
 #'
 ### FileStructure
@@ -51,9 +53,12 @@ shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "Plate_no"
   if (length(covName) > 0) {
     cvrt <- data.frame(envData)[,covName]
   }else{
-        cvrt <- NULL
-      }
+    cvrt <- NA
 
+  }
+  class(env) <-  "SlicedData"
+  class(cvrt)  <-  "SlicedData"
+  class(methComBat) <-  "SlicedData"
 
   ## Run the analysis
   Emodel <- Matrix_eQTL_engine2(

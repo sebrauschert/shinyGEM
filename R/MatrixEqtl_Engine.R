@@ -1055,6 +1055,8 @@ Matrix_eQTL_engine2 = function(
   addInfo = "") {
   ################################# Basic variable checks #################################
   {
+
+    ############### Remove following lines as they will not be class data types ###############
     # status("Performing basic checks of the input variables");
     stopifnot( "SlicedData" %in% class(gene) );
     stopifnot( any(c("SlicedData","SlicedData.fmt") %in% class(snps)) );
