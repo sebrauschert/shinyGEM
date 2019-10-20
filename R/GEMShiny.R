@@ -48,17 +48,21 @@ shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "Plate_no"
   # Setting up for matrix eQTL package
   errorCovariance = numeric();
   # Setting target environmental factor
-  env <- data.frame(envData)[,predictorName]
+
+    env <- SlicedData$new();
+  env$dataFrame = data.frame(envData)[,predictorName]
+  cvrt <- SlicedData$new()
   # Setting covariance variable, if none set set cvrt to null
   if (length(covName) > 0) {
-    cvrt <- data.frame(envData)[,covName]
+    cvrt$dataFrame = data.frame(envData)[,covName]
   }else{
     cvrt <- NA
 
   }
-  class(env) <-  "SlicedData"
-  class(cvrt)  <-  "SlicedData"
-  class(methComBat) <-  "SlicedData"
+  # Settig up cpg data
+  cpg  <- SlicedData$new()
+  cpg$dataFrame = methComBat
+
 
   ## Run the analysis
   Emodel <- Matrix_eQTL_engine2(
