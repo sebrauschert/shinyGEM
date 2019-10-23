@@ -3,6 +3,14 @@
 library(sva)
 library(data.table)
 
+## Test out try with the whole epigenetic data set - seb
+## Fix the CpG names
+## Check everyhting
+## Add in options batch adjustment options
+## qqplot manhattan and volcanoe plot - download results file
+## run with 400,000 rows and less subjects
+
+
 
 #' shinyGEM_Emodel
 #'
@@ -32,6 +40,7 @@ library(data.table)
 #'envFileName = "R/envir.csv"
 #'methylFileName = "R/Methyl.csv"
 #'predictorName = "preg_SMK_Y_N"
+#'batchName = "Plate_no"
 #'
 #'
 ### FileStructure
@@ -40,37 +49,34 @@ library(data.table)
 shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "Plate_no",
                        predictorName= "Smoke",covName= NULL, outputFileName = "GemEmodelOutput.csv"){
   # Read in environmental data
-  envData = fread(envFileName,header=TRUE)
+envData = data.frame(fread(envFileName,header=TRUE))
   # Read in methylation data
-  methylData = fread(methylFileName)
+  methylData = data.frame(fread(methylFileName,header=TRUE),row.names=1)
   # Calling batchAdjust function which implements the ComBat method
   methComBat <- batchAdjust(envData,methylData,batchName)
   # Setting up for matrix eQTL package
   errorCovariance = numeric();
   # Setting target environmental factor
 
-    env <- SlicedData$new();
-  env$dataFrame = data.frame(envData)[,predictorName]
-  cvrt <- SlicedData$new()
-  # Setting covariance variable, if none set set cvrt to null
+   env <-  SlicedData(t(as.matrix(data.frame(envData)[,predictorName])))
+
+    # Setting covariance variable, if none set set cvrt to null
   if (length(covName) > 0) {
-    cvrt$dataFrame = data.frame(envData)[,covName]
+    cvrt$dataFrame = SlicedData(t(as.matrix(data.frame(envData)[,covName])))
   }else{
-    cvrt <- NA
+    cvrt <- SlicedData()
 
   }
   # Settig up cpg data
-  cpg  <- SlicedData$new()
-  cpg$dataFrame = methComBat
-
+  meth <- SlicedData(as.matrix(methComBat))
 
   ## Run the analysis
   Emodel <- Matrix_eQTL_engine2(
     snps = env,
-    gene = methComBat,
+    gene = meth,
     cvrt = cvrt,
     output_file_name =  NULL,
-    pvOutputThreshold = Emodel_pv,
+    pvOutputThreshold = 1,
     useModel = modelLINEAR,
     errorCovariance = errorCovariance,
     verbose = FALSE,

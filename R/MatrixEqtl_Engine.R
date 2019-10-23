@@ -15,6 +15,8 @@ modelLINEAR_CROSS = 1113461L;
 
 
 #' @importFrom methods setRefClass
+#'
+#
 SlicedData <- setRefClass( "SlicedData",
                            fields = list(
                              dataEnv = "environment",
@@ -41,7 +43,7 @@ SlicedData <- setRefClass( "SlicedData",
                                fileOmitCharacters <<- "NA"
                                return(invisible(.self));
                              },
-                             CreateFromMatrix = function( mat ) {
+                               CreateFromMatrix = function( mat ) {
                                stopifnot( class(mat) == "matrix" );
                                setSliceRaw( 1L ,mat );
                                rns = rownames( mat, do.NULL = FALSE);
