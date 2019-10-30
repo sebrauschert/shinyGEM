@@ -12,7 +12,7 @@
 batchAdjust <- function(envData,methylData,batchName){
 
   ## ComBat adjustment
-  methComBat = ComBat(dat=matrix(as.numeric(unlist(methylData)),ncol=NCOL(methylData)), batch = as.factor(data.frame(envData)[,batchName] ))
+  methComBat = ComBat(dat=as.matrix(methylData), batch = as.factor(envData[,batchName] ))
 
 }
 

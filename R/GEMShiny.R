@@ -30,7 +30,7 @@ library(data.table)
 #' @param envFileName A csv or txt file name of demographic and phenotypical data with columns representing environmental factors and columns representing sample
 #' @param methylFileName A csv or txt file of methylation data with the CpG sites in the rows and the samples across the columns
 #' @param batchName = "Plate_No" a variable containing the name of the batch effect variable used for the ComBat methylation
-#' @param predictorName = "Smoke" a variable continaing the name of the target environmental factor
+  #' @param predictorName = "Smoke" a variable continaing the name of the target environmental factor
 #' @param covName Either a single string or a vector of string containing the column names included in the regression model
 #' @param outputFileName = "GemEmodelOutput" a file name used as the output of the funciton. All results will be written to a file with this name.
 #'
@@ -41,7 +41,7 @@ library(data.table)
 #'methylFileName = "R/Methyl.csv"
 #'predictorName = "preg_SMK_Y_N"
 #'batchName = "Plate_no"
-#'
+#'covName=NULL
 #'
 ### FileStructure
 # Methyl cpg sites in the rows and samples across the columns
@@ -49,24 +49,26 @@ library(data.table)
 shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "Plate_no",
                        predictorName= "Smoke",covName= NULL, outputFileName = "GemEmodelOutput.csv"){
   # Read in environmental data
-envData = data.frame(fread(envFileName,header=TRUE))
+  envData = data.frame(fread(envFileName,header=TRUE),row.names=1)
   # Read in methylation data
   methylData = data.frame(fread(methylFileName,header=TRUE),row.names=1)
   # Calling batchAdjust function which implements the ComBat method
   methComBat <- batchAdjust(envData,methylData,batchName)
+  rm(methylData)
   # Setting up for matrix eQTL package
   errorCovariance = numeric();
   # Setting target environmental factor
 
-   env <-  SlicedData(t(as.matrix(data.frame(envData)[,predictorName])))
+  env <-  SlicedData(as.matrix(t(envData[,predictorName])))
 
-    # Setting covariance variable, if none set set cvrt to null
+  # Setting covariance variable, if none set set cvrt to null
   if (length(covName) > 0) {
-    cvrt$dataFrame = SlicedData(t(as.matrix(data.frame(envData)[,covName])))
+    cvrt$dataFrame = SlicedData((as.matrix(envData[,covName])))
   }else{
     cvrt <- SlicedData()
 
   }
+
   # Settig up cpg data
   meth <- SlicedData(as.matrix(methComBat))
 
@@ -88,7 +90,7 @@ envData = data.frame(fread(envFileName,header=TRUE))
 
   unlink(output_file_name);
   ## Results:
-  cat('Analysis done in: ', Emodel$time.in.sec, ' seconds', '\n');
+  cat('Analysis done in4: ', Emodel$time.in.sec, ' seconds', '\n');
   #show(Emodel$all$eqtls)
   #R2 = Emodel$all$eqtls$statistic ^ 2 / (Emodel$all$eqtls$statistic ^ 2 + Emodel$param$dfFull);
   result_Emodel <- cbind(
