@@ -4,9 +4,6 @@ library(sva)
 library(data.table)
 
 ## Test out try with the whole epigenetic data set - seb
-## Fix the CpG names
-## Check everyhting
-## Add in options batch adjustment options
 ## qqplot manhattan and volcanoe plot - download results file
 ## run with 400,000 rows and less subjects
 
@@ -30,7 +27,7 @@ library(data.table)
 #' @param envFileName A csv or txt file name of demographic and phenotypical data with columns representing environmental factors and columns representing sample
 #' @param methylFileName A csv or txt file of methylation data with the CpG sites in the rows and the samples across the columns
 #' @param batchName = "Plate_No" a variable containing the name of the batch effect variable used for the ComBat methylation
-  #' @param predictorName = "Smoke" a variable continaing the name of the target environmental factor
+#' @param predictorName = "Smoke" a variable continaing the name of the target environmental factor
 #' @param covName Either a single string or a vector of string containing the column names included in the regression model
 #' @param outputFileName = "GemEmodelOutput" a file name used as the output of the funciton. All results will be written to a file with this name.
 #'
@@ -46,7 +43,7 @@ library(data.table)
 ### FileStructure
 # Methyl cpg sites in the rows and samples across the columns
 # Environment file is enviromental factors in the columns and samples down the rows
-shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "Plate_no",
+shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "-1",
                        predictorName= "Smoke",covName= NULL, outputFileName = "GemEmodelOutput.csv"){
   # Read in environmental data
   envData = data.frame(fread(envFileName,header=TRUE),row.names=1)
@@ -54,16 +51,16 @@ shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "Plate_no"
   methylData = data.frame(fread(methylFileName,header=TRUE),row.names=1)
   # Calling batchAdjust function which implements the ComBat method
   methComBat <- batchAdjust(envData,methylData,batchName)
+  #Remove methylData file to free up room
   rm(methylData)
   # Setting up for matrix eQTL package
   errorCovariance = numeric();
   # Setting target environmental factor
-
   env <-  SlicedData(as.matrix(t(envData[,predictorName])))
 
   # Setting covariance variable, if none set set cvrt to null
   if (length(covName) > 0) {
-    cvrt$dataFrame = SlicedData((as.matrix(envData[,covName])))
+    cvrt = SlicedData((as.matrix(t(envData[,covName]))))
   }else{
     cvrt <- SlicedData()
 
@@ -102,7 +99,9 @@ shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "Plate_no"
   )
   colnames(result_Emodel) <- c("cpg", "beta", "stats", "pvalue", "FDR")
   write.table( result_Emodel, output_file_name, sep = "\t", row.names = F, quote = F)
-
+  jpeg(qqplot_file_name, width = 2000, height = 2000, res = 300)
+  plot(Emodel, pch = 16, cex = 0.7);
+  dev.off()
 
 }
 
