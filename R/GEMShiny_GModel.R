@@ -35,7 +35,7 @@
 #' Gmodel_pv = 1e-04
 GEM_Gmodel <-
   function(envFileName, methylFileName , batchName = "-1",
-           predictorName= "Smoke",covName= NULL, outputFileName = "GemEmodelOutput.csv"){
+           predictorName= "Smoke",covName= NULL, Gmodel_pv = 1e-4, outputFileName = "GemEmodelOutput.csv"){
     # Read in environmental data
     envData = data.frame(fread(envFileName,header=TRUE),row.names=1)
     # Read in methylation data
