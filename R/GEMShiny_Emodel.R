@@ -1,4 +1,3 @@
-# Package development and Roxygen 2
 
 library(sva)
 library(data.table)
@@ -43,8 +42,8 @@ library(data.table)
 ### FileStructure
 # Methyl cpg sites in the rows and samples across the columns
 # Environment file is enviromental factors in the columns and samples down the rows
-shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "-1",
-                       predictorName= "Smoke",covName= NULL, outputFileName = "GemEmodelOutput.csv"){
+shinyGEM_Emodel <- function(envFileName, methylFileName, predictorName, batchName = "-1",
+                       covName = NULL, outputFileName = "GemEmodelOutput.csv"){
   # Read in environmental data
   envData = data.frame(fread(envFileName,header=TRUE),row.names=1)
   # Read in methylation data
@@ -88,8 +87,6 @@ shinyGEM_Emodel <- function(envFileName, methylFileName , batchName = "-1",
   unlink(output_file_name);
   ## Results:
   cat('Analysis done in4: ', Emodel$time.in.sec, ' seconds', '\n');
-  #show(Emodel$all$eqtls)
-  #R2 = Emodel$all$eqtls$statistic ^ 2 / (Emodel$all$eqtls$statistic ^ 2 + Emodel$param$dfFull);
   result_Emodel <- cbind(
     as.character(Emodel$all$eqtls$gene),
     Emodel$all$eqtls$beta,

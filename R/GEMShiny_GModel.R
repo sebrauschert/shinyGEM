@@ -34,8 +34,8 @@
 #' @examples
 #' Gmodel_pv = 1e-04
 GEM_Gmodel <-
-  function(envFileName, methylFileName , batchName = "-1",
-           predictorName= "Smoke",covName= NULL, Gmodel_pv = 1e-4, outputFileName = "GemEmodelOutput.csv"){
+  function(envFileName, methylFileName, predictorName ,batchName = "-1",
+           covName= NULL, Gmodel_pv = 1e-4, outputFileName = "GemEmodelOutput.csv"){
     # Read in environmental data
     envData = data.frame(fread(envFileName,header=TRUE),row.names=1)
     # Read in methylation data
@@ -79,7 +79,6 @@ GEM_Gmodel <-
     unlink(output_file_name);
     ## Results:
     cat('Analysis done in: ', Gmodel$time.in.sec, ' seconds', '\n');
-    #R2 = Gmodel$all$eqtls$statistic ^ 2 / (Gmodel$all$eqtls$statistic ^ 2 + Gmodel$param$dfFull);
 
     result_Gmodel <- cbind(
       as.character(Gmodel$all$eqtls$gene),
