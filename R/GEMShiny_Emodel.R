@@ -5,6 +5,12 @@ library(data.table)
 ## Test out try with the whole epigenetic data set - seb
 ## qqplot manhattan and volcanoe plot - download results file
 ## run with 400,000 rows and less subjects
+## add in qqplot option plot or not plot
+## Delete not needed files and push it to git
+## change gmodel to overwrite the methylData variable
+## make the supplement
+
+
 
 
 
@@ -43,15 +49,13 @@ library(data.table)
 # Methyl cpg sites in the rows and samples across the columns
 # Environment file is enviromental factors in the columns and samples down the rows
 shinyGEM_Emodel <- function(envFileName, methylFileName, predictorName, batchName = "-1",
-                       covName = NULL, outputFileName = "GemEmodelOutput.csv"){
+                       covName = NULL, outputFileName = "GemEmodelOutput.csv",qqplot_file_name ="GEM_Emodel.jpg", qqplotInclude = TRUE ){
   # Read in environmental data
   envData = data.frame(fread(envFileName,header=TRUE),row.names=1)
   # Read in methylation data
   methylData = data.frame(fread(methylFileName,header=TRUE),row.names=1)
   # Calling batchAdjust function which implements the ComBat method
-  methComBat <- batchAdjust(envData,methylData,batchName)
-  #Remove methylData file to free up room
-  rm(methylData)
+  methylData <- batchAdjust(envData,methylData,batchName)
   # Setting up for matrix eQTL package
   errorCovariance = numeric();
   # Setting target environmental factor
@@ -66,7 +70,7 @@ shinyGEM_Emodel <- function(envFileName, methylFileName, predictorName, batchNam
   }
 
   # Settig up cpg data
-  meth <- SlicedData(as.matrix(methComBat))
+  meth <- SlicedData(as.matrix(methylData))
 
   ## Run the analysis
   Emodel <- Matrix_eQTL_engine2(
@@ -96,9 +100,11 @@ shinyGEM_Emodel <- function(envFileName, methylFileName, predictorName, batchNam
   )
   colnames(result_Emodel) <- c("cpg", "beta", "stats", "pvalue", "FDR")
   write.table( result_Emodel, output_file_name, sep = "\t", row.names = F, quote = F)
+  if(qqplotInclude){
   jpeg(qqplot_file_name, width = 2000, height = 2000, res = 300)
   plot(Emodel, pch = 16, cex = 0.7);
   dev.off()
+  }
 
 }
 
