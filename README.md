@@ -10,3 +10,9 @@ We aimed to build an easy to use package for wider application in the research c
 studies. 
 
 The main function in this package is <code>shinyGEM_Emodel()</code>.
+
+<p align="center">
+
+<img src="vignettes/logo.png"  width="40%" height="40%">
+
+</p>
