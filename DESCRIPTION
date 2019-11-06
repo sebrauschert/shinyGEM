@@ -1,11 +1,37 @@
 Package: shinyGEM
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Fast epigeome wide association studies and batch adjustment on laptop
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: c(person("Sebastian", "Rauschert",
+    email = "Sebastian.Rauschert@telethonkids.org.au", role = c("aut", "cre")),
+    person("Gabrielle", "O'Connor",
+    email = "gabrielleoconnor@ozemail.com.au", role = c("aut")))
+Date: 2019-11-04
+Description: The shinyGEM package was developed for democratizing the application of epigenome wide association studies (EWAS).
+  To perfrom an EWAS, usually bioinformatics expertise and especially knowledge of supercomputing or cloud computing is required on top of R expertise.
+  With this package, we present a computationally efficient way of performing an EWAS on a laptop with >= 16 GB RAM. Further, we implemented
+  an interactive shiny app, to make the application as seamless as possible, even for analyists with limited R knowledge
+  This package is build on top of the Matrix eQTL by Andrey A. Shabalin
+  http://www.bios.unc.edu/research/genomic_software/Matrix_eQTL/
+  http://cran.r-project.org/web/packages/policies.html , as well as the GEM (Gene Environment and Methylation) package
+  by Hong P. et al https://bioconductor.org/packages/release/bioc/html/GEM.html and the sva package by Leek JT et al. 
+  https://bioconductor.org/packages/release/bioc/html/sva.html.
+Dependes: R (>=3.5.0),
+          ggplot2,
+          ggrepel
+biocViews:
+Imports: magrittr,
+         data.table,
+         methods,
+         sva,
+         minfi,
+         IlluminaHumanMethylation450kanno.ilmn12.hg19
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+BugReports: https://github.com/Hobbeist/
