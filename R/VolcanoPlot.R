@@ -6,10 +6,6 @@
 #' IMPORTANT: The CpG identifier column needs to be called "ID"!
 #'
 #' @param EWAS An EWAS results data frame with columns for CpG-ID, p-value,
-#' @param annotate If TRUE (default) this will annotatate the EWAS results file with the gene and position info, using the \code{annotateCpG()} function of
-#' this package
-#' @param p.column.name This specifies the column for the model p-value in the EWAS result file
-#' @param beta.column.name The name of the beta coefficient column
 #' @param title Specify a title for the Volcano plot
 #' @return \code{VolcanoPlot} as an image.
 #' @export

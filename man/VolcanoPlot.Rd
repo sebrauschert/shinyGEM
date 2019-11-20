@@ -10,13 +10,6 @@ VolcanoPlot(EWAS, title = "title")
 \item{EWAS}{An EWAS results data frame with columns for CpG-ID, p-value,}
 
 \item{title}{Specify a title for the Volcano plot}
-
-\item{annotate}{If TRUE (default) this will annotatate the EWAS results file with the gene and position info, using the \code{annotateCpG()} function of
-this package}
-
-\item{p.column.name}{This specifies the column for the model p-value in the EWAS result file}
-
-\item{beta.column.name}{The name of the beta coefficient column}
 }
 \value{
 \code{VolcanoPlot} as an image.

@@ -39,6 +39,7 @@ shinyGEM_Emodel <- function(envFileName,
 
   # Read in methylation data
   methylData = fread(methylFileName,header=TRUE, data.table = FALSE)
+
   # Turn CpG namess into rownames
   rownames(methylData) <- methylData[,1]; methylData[,1] <- NULL
 
