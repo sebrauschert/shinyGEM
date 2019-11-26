@@ -15,7 +15,7 @@ VolcanoPlot <- function(EWAS, title="title"){
 
   names(EWAS)[1] <- "ID"
   EWAS <- as.data.frame(EWAS)
-  EWAS <- as.data.frame(annotateCpG(EWAS))
+  #EWAS <- as.data.frame(annotateCpG(EWAS))
 
 
   EWAS[,"pvalue"] <- as.numeric(as.character(EWAS[,"pvalue"]))
@@ -24,17 +24,20 @@ VolcanoPlot <- function(EWAS, title="title"){
   # Create a column indicating Bonferroni significance so it can be color coded in the volcano plot
   EWAS$SIGNI <- ifelse((EWAS[,"pvalue"] < 0.05/length(EWAS[,"pvalue"])),"significant","not significant")
 
-  EWAS$GENE <- ifelse(EWAS$SIGNI %in% "significant", EWAS$UCSC_RefGene_Name, NA)
-  EWAS$GENE <- sub("^[^_]*;", "", EWAS$GENE)
+  #EWAS$GENE <- ifelse(EWAS$SIGNI %in% "significant", EWAS$UCSC_RefGene_Name, NA)
+  EWAS$GENE <- ifelse(EWAS$SIGNI %in% "significant", EWAS$ID, NA)
 
-  ggplot() +
+  #EWAS$GENE <- sub("^[^_]*;", "", EWAS$GENE)
+
+ # ggplotly(
+    ggplot() +
     geom_point(data = EWAS, mapping = aes(y=EWAS[,"beta"], x=-log(EWAS[,"pvalue"], base=10),colour=EWAS$SIGNI),size=2) +
 
     geom_vline(aes(xintercept=-log(0.05/length(EWAS$SIGNI),base=10)),col="red")+
     geom_vline(aes(xintercept=-log(0.05,base=10)),col="darkgrey")+
-    geom_hline(aes(yintercept=0),linetype="dotted")+
+    geom_hline(aes(yintercept=0),linetype="dotted") +
 
-    # Annotate the significant CpGs with the nearest gene name
+    #Annotate the significant CpGs with the nearest gene name
     geom_text_repel(
       aes(y=EWAS[, "beta"], x=-log(EWAS[,"pvalue"], base=10), label = as.character(EWAS$GENE)),segment.color = "black",
       force=10, size=2) +
@@ -43,5 +46,6 @@ VolcanoPlot <- function(EWAS, title="title"){
     coord_flip() +
     ggtitle(title) +
     theme_minimal()
+  #)
 
 }

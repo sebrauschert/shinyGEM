@@ -18,7 +18,8 @@ Description: The shinyGEM package was developed for democratizing the applicatio
   https://bioconductor.org/packages/release/bioc/html/sva.html.
 Dependes: R (>=3.5.0),
           ggplot2,
-          ggrepel
+          ggrepel,
+          IlluminaHumanMethylation450kanno.ilmn12.hg19
 biocViews:
 Imports: magrittr,
          data.table,
@@ -27,8 +28,7 @@ Imports: magrittr,
          minfi,
          shiny,
          shinydashboard,
-         DT,
-         IlluminaHumanMethylation450kanno.ilmn12.hg19
+         DT
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
