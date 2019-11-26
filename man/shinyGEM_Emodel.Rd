@@ -4,8 +4,14 @@
 \alias{shinyGEM_Emodel}
 \title{The GEM_Emodel method is used to find associations between methylation and environmental factors on a epigenome wide level.}
 \usage{
-shinyGEM_Emodel(envFileName, methylFileName, predictorName,
-  batchName = FALSE, covName = NULL, qqplotInclude = TRUE)
+shinyGEM_Emodel(
+  envFileName,
+  methylFileName,
+  predictorName,
+  batchName = FALSE,
+  covName = NULL,
+  qqplotInclude = TRUE
+)
 }
 \arguments{
 \item{envFileName}{A csv or txt file name of demographic and phenotypical data with columns representing environmental factors and columns representing sample}
@@ -18,7 +24,7 @@ shinyGEM_Emodel(envFileName, methylFileName, predictorName,
 
 \item{covName}{Either a single string or a vector of string containing the column names included in the regression model}
 
-\item{output_file_name}{= "GemEmodelOutput" a file name used as the output of the funciton. All results will be written to a file with this name.}
+\item{qqplotInclude}{= By default, the results will contain the qqplot of the model.}
 }
 \value{
 output a list of values for the

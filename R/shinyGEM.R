@@ -8,7 +8,6 @@
 #' @import data.table
 #' @import ggplot2
 #' @import ggrepel
-#' @import minfi
 #' @return \code{shinyGEM} to launch shiny app
 #' @examples
 #' \dontrun{

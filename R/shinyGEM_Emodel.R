@@ -17,7 +17,7 @@
 #' @param batchName = "Plate_No" a variable containing the name of the batch effect variable used for the ComBat methylation
 #' @param predictorName = "Smoke" a variable continaing the name of the target environmental factor
 #' @param covName Either a single string or a vector of string containing the column names included in the regression model
-#' @param output_file_name = "GemEmodelOutput" a file name used as the output of the funciton. All results will be written to a file with this name.
+#' @param qqplotInclude = By default, the results will contain the qqplot of the model.
 #'
 #' @importFrom data.table fread
 #' @return output a list of values for the

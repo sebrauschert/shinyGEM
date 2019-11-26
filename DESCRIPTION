@@ -16,22 +16,21 @@ Description: The shinyGEM package was developed for democratizing the applicatio
   http://cran.r-project.org/web/packages/policies.html , as well as the GEM (Gene Environment and Methylation) package
   by Hong P. et al https://bioconductor.org/packages/release/bioc/html/GEM.html and the sva package by Leek JT et al. 
   https://bioconductor.org/packages/release/bioc/html/sva.html.
-Dependes: R (>=3.5.0),
-          ggplot2
+Dependes: R (>=3.5.0)
 biocViews:
 Imports: magrittr,
          data.table,
          methods,
          sva,
-         minfi,
          shiny,
          shinydashboard,
          ggrepel,
-         DT
+         DT,
+         ggplot2
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.1
 Suggests: 
     knitr,
     rmarkdown,
