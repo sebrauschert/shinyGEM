@@ -30,13 +30,13 @@ shinyGEM_Emodel <- function(envFileName,
                             predictorName,
                             batchName = FALSE,
                             covName = NULL,
-                            output_file_name = "GemEmodelOutput.csv",
-                            qqplot_file_name ="GEM_Emodel.jpg",
+                            #output_file_name = "GemEmodelOutput.csv",
+                            #qqplot_file_name ="GEM_Emodel.jpg",
                             qqplotInclude = TRUE){
   # Read in environmental data
   envData = fread(envFileName,header=TRUE, data.table = FALSE)
   rownames(envData) <- envData[,1]; envData[,1] <- NULL
-
+  output_file_name <- "output_file_name"
   # Read in methylation data
   methylData = fread(methylFileName,header=TRUE, data.table = FALSE)
 
@@ -94,13 +94,19 @@ shinyGEM_Emodel <- function(envFileName,
     as.character(as.numeric(Emodel$all$eqtl$FDR))
   )
   colnames(result_Emodel) <- c("cpg", "beta", "stats", "pvalue", "FDR")
-  write.table( result_Emodel, output_file_name, sep = ",", row.names = F, quote = F)
+  #write.table( result_Emodel, output_file_name, sep = ",", row.names = F, quote = F)
 
   if(qqplotInclude){
-    jpeg(qqplot_file_name, width = 2000, height = 2000, res = 300)
+    #jpeg(qqplot_file_name, width = 2000, height = 2000, res = 300)
+    pdf(NULL)
+    dev.control(displaylist="enable")
     plot(Emodel, pch = 16, cex = 0.7);
-    dev.off()
-  }
-  as.data.frame(result_Emodel)
 
+    qq <-  recordPlot()
+    invisible(dev.off())
+  }
+  dataGEM <- as.data.frame(result_Emodel)
+  dataList <- list(dataGEM,qq)
+  names(dataList) <- c("resultTable", "qqPlot")
+  return(dataList)
 }

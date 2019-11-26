@@ -82,7 +82,9 @@ shinyGEM <- function(){
                                                             multiple = FALSE,
                                                             accept = c("text/csv/rds",
                                                                        "text/comma-separated-values,text/plain",
-                                                                       ".csv", ".rds", ".txt"))),
+                                                                       ".csv", ".rds", ".txt")),
+                                                  uiOutput("var_ui"),
+                                                  uiOutput("co_var")),
 
 
                                          tabPanel(title = "Step 3", background = "red", icon = icon("database"),
@@ -191,14 +193,18 @@ shinyGEM <- function(){
         # Setting up for matrix eQTL package
         errorCovariance = numeric();
         # Setting target environmental factor
-        env <-  SlicedData(as.matrix(t(envData[,"preg_SMK_Y_N"])))
+        env <-  SlicedData(as.matrix(t(envData[,as.character(input$var)])))
 
         # Setting covariance variable, if none set set cvrt to null
         # if (length(covName) > 0) {
         #   cvrt = SlicedData((as.matrix(t(envData[,covName]))))
         # }else{
-        cvrt <- SlicedData()
 
+       # if(input$covar %in% NULL){
+        #  cvrt <- SlicedData()
+        #} else{
+          cvrt <- SlicedData((as.matrix(t(envData[,as.character(input$covars)]))))
+        #}
         # }
         incProgress(5, detail = "Calculation may take a while...")
         # Settig up cpg data
@@ -289,8 +295,19 @@ shinyGEM <- function(){
           ggsave(file, plot = volcano, device = device)
       }
     )
-  }
 
+
+    output$var_ui <- renderUI({
+      selectInput("var", "Choose predictor variable:", choices= names(envData()))
+    })
+
+
+  output$co_var <- renderUI({
+    selectInput("covars","Choose covariates:",
+                names(envData()), multiple = TRUE)
+  })
+
+  }
   shinyApp(ui, server)
 
 }
