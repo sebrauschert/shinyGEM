@@ -90,6 +90,7 @@ shinyGEM <- function(){
                                          tabPanel(title = "Step 3", background = "red", icon = icon("database"),
                                                   selectInput("batch1", "Do you need batch adjustment?",c("yes", "no")),
                                                   textInput("batch2", "Select your batch variable"),
+                                                  textInput("plotTitle", "Enter a plot title"),
                                                   tags$h2("Click button to start GEM model"),
                                                   actionButton("button", "Start GEM model"),width = 2)),
 
@@ -100,15 +101,6 @@ shinyGEM <- function(){
                                                   DT::dataTableOutput("contents"), color="black", solidHeader = TRUE, width = 6),
                                          tabPanel(title = "Covariate data",
                                                   DT::dataTableOutput("contents2"), color="black", solidHeader = TRUE, width = 6))),
-
-
-
-                                  # tabBox(title = "GEM Results", width = 9, side = "right",
-                                  #        tabPanel(title = "Displaying GEM results",
-                                  #                 DT::dataTableOutput("contents3"), color="black", solidHeader = TRUE, width = 9,
-                                  #                 tags$br(),
-                                  #                 downloadButton("downloadData", "Download table")),
-                                  #        tabPanel(title="Volcano Plot",plotOutput("volcano"), color="black", solidHeader = TRUE)))
 
                                fluidRow(
                                  box(title = "GEM Results", width = 6,#side = "right",
@@ -277,7 +269,7 @@ shinyGEM <- function(){
 
       df <- na.omit(as.data.frame(getGEM()))
 
-      VolcanoPlot(df)
+      VolcanoPlot(df, title=as.character(input$plotTitle))
 
     })
 
@@ -290,7 +282,7 @@ shinyGEM <- function(){
         #device <- function(..., width, height) grDevices::pdf(..., width = width, height = height)#, res = 300, units = "in")
 
           df <- na.omit(as.data.frame(getGEM()))
-          volcano <- VolcanoPlot(df)
+          volcano <- VolcanoPlot(df, title=as.character(input$plotTitle))
 
           ggsave(file, plot = volcano, device = device)
       }
