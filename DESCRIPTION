@@ -17,8 +17,7 @@ Description: The shinyGEM package was developed for democratizing the applicatio
   by Hong P. et al https://bioconductor.org/packages/release/bioc/html/GEM.html and the sva package by Leek JT et al. 
   https://bioconductor.org/packages/release/bioc/html/sva.html.
 Dependes: R (>=3.5.0),
-          ggplot2,
-          IlluminaHumanMethylation450kanno.ilmn12.hg19
+          ggplot2
 biocViews:
 Imports: magrittr,
          data.table,

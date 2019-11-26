@@ -30,8 +30,6 @@ shinyGEM_Emodel <- function(envFileName,
                             predictorName,
                             batchName = FALSE,
                             covName = NULL,
-                            #output_file_name = "GemEmodelOutput.csv",
-                            #qqplot_file_name ="GEM_Emodel.jpg",
                             qqplotInclude = TRUE){
   # Read in environmental data
   envData = fread(envFileName,header=TRUE, data.table = FALSE)
