@@ -25,7 +25,7 @@ VolcanoPlot <- function(EWAS, title="title"){
   EWAS$SIGNI <- ifelse((EWAS[,"pvalue"] < 0.05/length(EWAS[,"pvalue"])),"significant","not significant")
 
   #EWAS$GENE <- ifelse(EWAS$SIGNI %in% "significant", EWAS$UCSC_RefGene_Name, NA)
-  EWAS$GENE <- ifelse(EWAS$SIGNI %in% "significant", EWAS$ID, NA)
+  EWAS$GENE <- ifelse(EWAS$SIGNI %in% "significant", as.character(EWAS$ID), NA)
 
   #EWAS$GENE <- sub("^[^_]*;", "", EWAS$GENE)
 
