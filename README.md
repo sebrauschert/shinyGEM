@@ -17,13 +17,13 @@ studies.
 
 The main functions in this package are:  
 
-* <code>shinyGEM_Emodel()</code> and  
+* <code>shinyGEM_Emodel()</code>   
 * <code>shinyGEM()</code>  
 * <code>VolcanoPlot()</code>
 
 <h2>Machine recommendations</h2>
 
-So far, the package was tested with Illumina HumanMEthylation450 data (~450k variables, 8.51GB). For this kind of data, we recommend at least:  
+So far, the package was tested with Illumina HumanMethylation450 data (~450k variables, 8.51GB). For this kind of data, we recommend at least:  
 
 * A Windows/Mac/Linux machine with at least 16GB of RAM
 * RStudio > 3.5
