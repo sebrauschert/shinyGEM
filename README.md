@@ -4,11 +4,11 @@
 
 In this repository we develop a R package for fast linear modelling of genetic/epigenetic or any other large omic data. This project is based on the 
 <a href="https://github.com/fastGEM/GEM" target="blank_">*GEM*</a> (gene, environment, methylation) package, developed by <a href="https://www.ncbi.nlm.nih.gov/pubmed/27480116">Hong P. et al.(2016)</a>. 
-The *GEM* package uses functionalities from the <a href="https://github.com/andreyshabalin/MatrixEQTL" target="blank_">*MatrixEQTL*</a> package.  
+The *GEM* package uses functionalities from the <a href="https://github.com/andreyshabalin/MatrixEQTL" target="blank_">*MatrixEQTL*</a> package, developed by Shabalin A (2012).  
 A publication, outlining further testing, development and reasons for the development of this package is in preparation.
 
 
-The application and a practical example of the application of this package can be found on the <a href="https://hobbeist.github.io/shinyGEM/">instruction page</a>.
+The application and a practical example for the usage this package can be found on the <a href="https://hobbeist.github.io/shinyGEM/">instruction page</a>.
 
 We aimed to build an easy to use package for wider application in the research community, enabling non-bioinformaticians to perform epigenome/genome wide association
 studies. 
