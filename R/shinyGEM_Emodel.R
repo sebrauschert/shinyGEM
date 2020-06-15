@@ -34,6 +34,8 @@ shinyGEM_Emodel <- function(envFileName,
   # Read in environmental data
   envData = fread(envFileName,header=TRUE, data.table = FALSE)
   rownames(envData) <- envData[,1]; envData[,1] <- NULL
+
+  # Needs to be set as per MatrixEQTL package, can be ignored
   output_file_name <- "output_file_name"
   # Read in methylation data
   methylData = fread(methylFileName,header=TRUE, data.table = FALSE)
