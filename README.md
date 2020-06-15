@@ -2,13 +2,9 @@
 
 This repository is based on the following paper (currently in preparation):
 
-<br></br>
 
 **shinyGEM: A computationally efficient epigenome wide statistical analysis software, with a focus on batch effects**
-
-<br></br>
-
-by Gabrielle O’Connor, Phillip E Melton, Rae-Chi Huang, Ashleigh Lin, Gopalan Nair, and Sebastian Rauschert.
+_by Gabrielle O’Connor, Phillip E Melton, Rae-Chi Huang, Ashleigh Lin, Gopalan Nair, and Sebastian Rauschert._
 
 <h2>Background</h2>
 
